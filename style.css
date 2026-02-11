@@ -254,9 +254,9 @@ img {
     display: block; /* por defaul la caja que toma el navegador es la caja typografica inline, al darle un color de fondo, backgroud color, estamos haciendo que tenga una caja cuadrada de fondo que es mas grande que la caja tipografia, para que el navegador lea esta caja de color y no la caja tipografica, agregamos la propiedad display con el valor block en lugar de inline */
 }
 
-.nav li a:hover {
-    /* aqui doy formato a los elementos a dentro de la lista dentro de la clase nav cuando el maus pasa por encima de ellos */
-    background-color: #323232; /*#333333 gris frio /*solo cambio el color de fondo*/
+.nav li a:hover,
+.nav > li:hover > a {
+    background-color: #323232;
     color: white;
 }
 
@@ -276,7 +276,15 @@ img {
 .nav li ul li {
     /*aqui formateamos la sublista de la sublista de la lista dentro de nav*/
     position: relative; /*la posicion relativa hace que este sub menu aparezca al lado y no debajo, como ocurriría si ponemos absoluto*/
-    background-color: #FAFBFC;
+}
+
+.nav li ul li a {
+    background-color: #323232;
+    color: white;
+}
+
+.nav li ul li a:hover {
+    background-color: #1a1a1a;
 }
 
 .nav li ul li ul {
