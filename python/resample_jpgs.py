@@ -23,7 +23,6 @@ def resample_jpgs(folder_path, target_width=1920, quality=80):
         return
 
     processed_count = 0
-    skipped_count = 0
     failed_files = []
 
     # Find all JPG files (case-insensitive)
@@ -41,18 +40,20 @@ def resample_jpgs(folder_path, target_width=1920, quality=80):
             img = Image.open(jpg_path)
             original_width, original_height = img.size
 
-            # Check if resizing is needed
-            if original_width <= target_width:
-                print(f"⊘ Skipped: {os.path.basename(jpg_path)} (already {original_width}px wide)")
-                skipped_count += 1
-                continue
+            # Preserve ICC color profile and EXIF data
+            icc_profile = img.info.get('icc_profile')
+            exif = img.info.get('exif')
 
-            # Calculate new height maintaining aspect ratio
-            aspect_ratio = original_height / original_width
-            new_height = int(target_width * aspect_ratio)
-
-            # Resize image using high-quality resampling
-            img_resized = img.resize((target_width, new_height), Image.LANCZOS)
+            # Only resize if image is larger than target width
+            if original_width > target_width:
+                aspect_ratio = original_height / original_width
+                new_height = int(target_width * aspect_ratio)
+                img_resized = img.resize((target_width, new_height), Image.LANCZOS)
+                resized = True
+            else:
+                img_resized = img
+                new_height = original_height
+                resized = False
 
             # Convert to RGB if necessary (removes alpha channel)
             if img_resized.mode in ('RGBA', 'LA', 'P'):
@@ -64,11 +65,19 @@ def resample_jpgs(folder_path, target_width=1920, quality=80):
             elif img_resized.mode != 'RGB':
                 img_resized = img_resized.convert('RGB')
 
-            # Save with specified quality, replacing original
-            img_resized.save(jpg_path, 'JPEG', quality=quality, optimize=True)
+            # Save with specified quality, preserving color profile
+            save_kwargs = {'quality': quality, 'optimize': True, 'dpi': (72, 72), 'subsampling': 0}
+            if icc_profile:
+                save_kwargs['icc_profile'] = icc_profile
+            if exif:
+                save_kwargs['exif'] = exif
+            img_resized.save(jpg_path, 'JPEG', **save_kwargs)
 
             processed_count += 1
-            print(f"✓ Resampled: {os.path.basename(jpg_path)} ({original_width}x{original_height} → {target_width}x{new_height})")
+            if resized:
+                print(f"✓ Resampled: {os.path.basename(jpg_path)} ({original_width}x{original_height} → {target_width}x{new_height})")
+            else:
+                print(f"✓ Recompressed: {os.path.basename(jpg_path)} ({original_width}x{original_height}, kept size)")
 
         except Exception as e:
             failed_files.append((os.path.basename(jpg_path), str(e)))
@@ -76,13 +85,12 @@ def resample_jpgs(folder_path, target_width=1920, quality=80):
 
     print(f"\n=== Resampling Complete ===")
     print(f"Processed: {processed_count} files")
-    print(f"Skipped (already smaller): {skipped_count} files")
     if failed_files:
         print(f"Failed: {len(failed_files)} files")
         for filename, error in failed_files:
             print(f"  - {filename}: {error}")
 
-    return processed_count, skipped_count, failed_files
+    return processed_count, failed_files
 
 
 if __name__ == "__main__":
