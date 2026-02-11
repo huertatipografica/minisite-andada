@@ -1,0 +1,2 @@
+# Image processing library required for convert_to_gif.py and resample_jpgs.py
+Pillow>=10.0.0
