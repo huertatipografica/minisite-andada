@@ -448,11 +448,183 @@ code {
     display: flex;
 }
 
-@media screen and (max-width: 700px) {
+/* Hamburger button — hidden on desktop */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 10px 12px;
+    float: right;
+    line-height: 1;
+}
+
+@media screen and (max-width: 1024px) {
+    html {
+        overflow-x: hidden;
+    }
+
     .topnav {
         justify-content: space-between;
     }
     .topnav div.parts {
         display: none;
+    }
+
+    /* --- Hamburger nav --- */
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        left: 0;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    nav hr,
+    nav .textright {
+        display: none;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        width: 260px;
+        padding: 0;
+        z-index: 20;
+        box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav.nav-open {
+        display: block;
+    }
+
+    .nav > li {
+        float: none;
+    }
+
+    .nav li a {
+        padding: 8px 15px;
+        border-bottom: 1px solid #d6cec8;
+        font-size: 0.75rem;
+        background-color: #4D4845;
+        color: #fff;
+    }
+
+    .nav li a:hover,
+    .nav > li:hover > a {
+        background-color: #3a3330;
+        color: #fff;
+    }
+
+    .nav li ul {
+        position: static;
+        display: block;
+        min-width: 0;
+        padding-left: 0;
+    }
+
+    .nav li ul li a {
+        background-color: #5c5550;
+        color: #e8e0da;
+        padding: 6px 15px 6px 30px;
+    }
+
+    .nav li ul li a:hover {
+        background-color: #3a3330;
+        color: #fff;
+    }
+
+    .nav li ul li ul {
+        right: auto;
+        top: auto;
+        position: static;
+        padding-left: 0;
+    }
+
+    .nav li ul li ul li a {
+        background-color: #6b6360;
+        color: #e8e0da;
+        padding-left: 45px;
+    }
+
+    .nav li ul li ul li a:hover {
+        background-color: #3a3330;
+        color: #fff;
+    }
+
+    /* --- Main content offset --- */
+    main {
+        top: 60px;
+        left: 0;
+        box-sizing: border-box;
+        padding: 0 15px;
+    }
+
+    section, article, .gototop, [id] {
+        scroll-margin-top: 65px;
+    }
+
+    /* --- Body / container padding --- */
+    body {
+        box-sizing: border-box;
+    }
+
+    /* --- Multi-column → single column --- */
+    .columntext {
+        column-count: 1;
+    }
+
+    .columntext4 {
+        column-count: 1;
+    }
+
+    /* --- Float layouts → stacked --- */
+    .imgleft,
+    .imgright {
+        float: none;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .smallslidesright,
+    .smallslidesleft {
+        float: none;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* --- Gallery grid → 2 columns --- */
+    .column {
+        flex: 50%;
+    }
+
+    /* --- Typography adjustments --- */
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .bajada {
+        font-size: 1.3rem;
+    }
+
+    /* --- Flex container → full width --- */
+    .flex-container {
+        display: block;
+        width: 100%;
+    }
+
+    /* --- Ensure content doesn't touch edges --- */
+    .container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .gototop a {
+        box-sizing: border-box;
     }
 }

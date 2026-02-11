@@ -29,6 +29,8 @@
 				<a href="#Overview"><img src="./img/andadaht.svg" alt="Andada ht"></a>
 			</div>
 
+			<button class="menu-toggle" aria-label="Menu" aria-expanded="false">&#9776;</button>
+
 			<ul class="nav">
 				<li><a href="https://www.htfonts.com/en/contact" target="_blank">Contact</a></li>
 
@@ -114,7 +116,7 @@
 			<div class="container">
 				<div class="columntext">
 					<ul class="green">
-						<li><strong>Type Foundry:</strong> HT Fontx</li>
+						<li><strong>Type Foundry:</strong> HT Fonts</li>
 						<li><strong>Author:</strong> Carolina Giovagnoli</li>
 						<li><strong>Created:</strong> 2010</li>
 						<li><strong>Revision 1:</strong> 2015. OpenType SmallCaps</li>
@@ -1362,7 +1364,7 @@
 				<div class="columntext4">
 					<figure class="logohtfoot">
 						<a href="https://www.htfonts.com/en" target="_blank">
-							<img src="./img/htfonts-b.png" alt="HT Fontx" style="height: 40px; width: auto;"></a>
+							<img src="./img/htfonts-b.png" alt="HT Fonts" style="height: 40px; width: auto;"></a>
 					</figure>
 					<ul>
 						<li><a href="#Overview">Overview</a></li>
@@ -1389,7 +1391,7 @@
 					</ul>
 				</div>
 				<div class="container">
-					<p> © 2026 HT Fontx. All rights reserved.</p>
+					<p> © 2026 HT Fonts. All rights reserved.</p>
 				</div>
 			</div>
 		</section>
@@ -1427,6 +1429,26 @@
 
 			});
 		});
+	</script>
+
+	<script>
+		(function () {
+			var btn = document.querySelector('.menu-toggle');
+			var nav = document.querySelector('ul.nav');
+
+			btn.addEventListener('click', function () {
+				var expanded = btn.getAttribute('aria-expanded') === 'true';
+				nav.classList.toggle('nav-open');
+				btn.setAttribute('aria-expanded', !expanded);
+			});
+
+			nav.addEventListener('click', function (e) {
+				if (e.target.tagName === 'A') {
+					nav.classList.remove('nav-open');
+					btn.setAttribute('aria-expanded', false);
+				}
+			});
+		})();
 	</script>
 
 </body>
