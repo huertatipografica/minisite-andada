@@ -206,6 +206,11 @@ img {
     font-size: 0.8rem;
 }
 
+section#foot .columntext4 ul {
+    break-before: column;
+    break-inside: avoid;
+}
+
 /* |||||| ESTILOS DE LA BARRA DE NAVEGACION |||||| */
 
 .nav {
