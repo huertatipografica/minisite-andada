@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static showcase website for the **Andada ht** typeface by Huerta Tipográfica. Hosted on GitHub Pages at andada.huertatipografica.com. No build system or framework — pure HTML/CSS/JS served as-is.
+Static showcase website for the **Andada** typeface by HT Fonts. Hosted on GitHub Pages at andada.htfonts.com. No build system or framework — pure HTML/CSS/JS served as-is.
 
 ## Development
 
