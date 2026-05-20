@@ -231,10 +231,22 @@ img {
     float: left;
 }
 
+.logo > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 10px;
+}
+
 .logo > a img {
     max-height: 50px;
-    vertical-align: middle;
-    padding: 10px 0 0 0;
+    display: block;
+}
+
+.logo > a img.logo-iso {
+    width: 30px;
+    height: auto;
+    max-height: none;
 }
 
 .nav > li {
@@ -411,12 +423,6 @@ code {
     display: flex;
 }
 
-
-.topnav .weg {
-    background: url(./img/ht.svg) 14px center no-repeat;
-    padding-left: 52px;
-    background-size: 28px 28px;
-}
 
 .topnav i {
     margin-left: 0.5em;
