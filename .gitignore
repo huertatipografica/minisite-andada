@@ -2,11 +2,3 @@
 .DS_Store
 img/web_info-general-2020.zip
 index copy.html
-
-# Python virtual environment
-venv/
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
